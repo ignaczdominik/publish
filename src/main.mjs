@@ -6,7 +6,9 @@ import { Hotel } from '@models/Hotel.mjs'
 import { Offer } from '@models/Offer.mjs'
 import { Feature } from '@models/Feature.mjs'
 
-import {priceFormatter} from "@utils/formatter.mjs"
+import { priceFormatter } from "@utils/formatter.mjs"
+
+import {http} from '@utils/http.mjs'
 
 let Features
 let Hotels
@@ -14,12 +16,17 @@ let Offers
 
 let filtered
 
-const featureFetch = fetch("https://frontend.njit.ut-idb.com/travel/features")
-    .then(r => r.json())
-const hotelFetch = fetch("https://frontend.njit.ut-idb.com/travel/hotels")
-    .then(r => r.json())
-const offerFetch = fetch("https://frontend.njit.ut-idb.com/travel/offers")
-    .then(r => r.json())
+
+
+const featureFetch = http.get("features")
+    .then(response => response.data)
+
+const hotelFetch = http.get("hotels")
+    .then(response => response.data)
+   
+const offerFetch = http.get("offers")
+    .then(response => response.data)
+
 
 Promise.all([featureFetch, hotelFetch, offerFetch])
     .then(([featuresData, hotelsData, offersData]) => {
@@ -44,17 +51,17 @@ Promise.all([featureFetch, hotelFetch, offerFetch])
     })
 
 
-function loadOffers(){
+function loadOffers() {
     const row = document.querySelector("#offers");
-    while(row.firstChild){
+    while (row.firstChild) {
         row.firstChild.remove();
     }
 
     const template = document.querySelector("template");
     const templateContent = template.content.querySelector(".col-12");
 
-    for(const offer of filtered){
-        const card = document.importNode(templateContent,true);
+    for (const offer of filtered) {
+        const card = document.importNode(templateContent, true);
         card.querySelector("img").src = offer.hotelImage
         card.querySelector(".card-title").textContent = offer.hotelName
         card.querySelector(".card-text").textContent = offer.summary
@@ -64,18 +71,18 @@ function loadOffers(){
     }
 }
 
-function filter(){
+function filter() {
     const minValue = document.querySelector("#min-price").value
     const maxValue = document.querySelector("#max-price").value
 
-    filtered = Offers.filter(o=>{
-        if(minValue != "" && maxValue == ""){
+    filtered = Offers.filter(o => {
+        if (minValue != "" && maxValue == "") {
             return o.cost >= minValue
         }
-        if(minValue == "" && maxValue != ""){
+        if (minValue == "" && maxValue != "") {
             return o.cost <= maxValue
         }
-        if(minValue != "" && maxValue != ""){
+        if (minValue != "" && maxValue != "") {
             return (o.cost >= minValue) && (o.cost <= maxValue)
         }
         return true
@@ -83,7 +90,7 @@ function filter(){
     loadOffers()
 }
 
-function clearFilter(){
+function clearFilter() {
     document.querySelector("#min-price").value = ""
     document.querySelector("#max-price").value = ""
     filtered = Offers

@@ -1,0 +1,19 @@
+{
+  "name": "travel-agency",
+  "version": "1.0.0",
+  "description": "Utazási Iroda honlapja",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "Ignácz Dominik Bence",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "bootstrap": "^5.3.2",
+    "date-fns": "^2.30.0",
+    "vite": "^5.0.5"
+  }
+}

@@ -6,6 +6,8 @@ import { Hotel } from '@models/Hotel.mjs'
 import { Offer } from '@models/Offer.mjs'
 import { Feature } from '@models/Feature.mjs'
 
+import {priceFormatter} from "@utils/formatter.mjs"
+
 let Features
 let Hotels
 let Offers
@@ -28,16 +30,36 @@ Promise.all([featureFetch, hotelFetch, offerFetch])
                 hotelFeature => Features.find(
                     feature => feature.id === hotelFeature)
             )
+            h.img = "./src/" + h.img.split('./')[1]
             return new Hotel(h)
         })
 
-        Offer = offersData.map(o => {
+        Offers = offersData.map(o => {
             o.hotel = Hotels.find(h => h.id === o.hotel_id)
-            return Offer(o)
+            return new Offer(o)
         })
 
         filtered = Offers
-        
+        loadOffers()
     })
 
 
+function loadOffers(){
+    const row = document.querySelector("#offers");
+    while(row.firstChild){
+        row.firstChild.remove();
+    }
+
+    const template = document.querySelector("template");
+    const templateContent = template.content.querySelector(".col-12");
+
+    for(const offer of filtered){
+        const card = document.importNode(templateContent,true);
+        card.querySelector("img").src = offer.hotelImage
+        card.querySelector(".card-title").textContent = offer.hotelName
+        card.querySelector(".card-text").textContent = offer.summary
+        card.querySelector(".card-text>small").textContent = offer.hotelFeatures
+        card.querySelector(".card-footer").textContent = `Ára: ${priceFormatter.format(offer.cost)}/fő/éj`
+        row.append(card);
+    }
+}

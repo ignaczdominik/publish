@@ -6,7 +6,8 @@ export default defineConfig({
         alias:{
             "@": fileURLToPath(new URL('./src', import.meta.url)),
             '@assets': fileURLToPath(new URL('./src/assets',import.meta.url)),
-            '@models': fileURLToPath(new URL('./src/model', import.meta.url))
+            '@models': fileURLToPath(new URL('./src/model', import.meta.url)),
+            '@utils': fileURLToPath(new URL('./src/utils', import.meta.url))
         }
     },
     server:{

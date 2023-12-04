@@ -1,7 +1,11 @@
 import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
+import viteProgressBar from "vite-plugin-progress";
 
 export default defineConfig({
+    plugins: [
+        viteProgressBar()
+    ],
     resolve:{
         alias:{
             "@": fileURLToPath(new URL('./src', import.meta.url)),

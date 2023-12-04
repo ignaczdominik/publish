@@ -37,7 +37,7 @@ Promise.all([featureFetch, hotelFetch, offerFetch])
                 hotelFeature => Features.find(
                     feature => feature.id === hotelFeature)
             )
-            h.img = "./src/" + h.img.split('./')[1]
+            h.img = "/images/" + h.img.split('/')[3]
             return new Hotel(h)
         })
 

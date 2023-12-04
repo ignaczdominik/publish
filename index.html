@@ -30,32 +30,42 @@
           </nav>
     </header>
     <main class="container container-fluid p-3">
-
-
-        <form>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="min-price">
-                            Minimum ár:
-                        </label>
-                        <input type="number" name="min-price" id="min-price" class="form-control">
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="max-price">
-                            Maximum ár:
-                        </label>
-                        <input type="number" name="max-price" id="max-price" class="form-control">
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-12">
+                <h1>Aktuális ajánlataink</h1>
             </div>
-            <div class="btn-group mt-4">
-                <button type="button" class="btn btn-info" id="run-filter">Szűrés</button>
-                <button type="button" class="btn btn-danger" id="clear-filter">Feltételek törlése</button>
+        </div>
+        <div class="row bg-info bg-opacity-25 rounded p-3">
+            <div class="col-12">
+                <form>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="min-price">
+                                    Minimum ár:
+                                </label>
+                                <input type="number" name="min-price" id="min-price" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="max-price">
+                                    Maximum ár:
+                                </label>
+                                <input type="number" name="max-price" id="max-price" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group mt-4">
+                        <button type="button" class="btn btn-info" id="run-filter">Szűrés</button>
+                        <button type="button" class="btn btn-danger" id="clear-filter">Feltételek törlése</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+       <div class="row mt-2" id="offers">
+        
+       </div>
     </main>
     <script type="module" src="src/main.mjs"></script>
 </body>

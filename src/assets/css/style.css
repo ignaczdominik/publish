@@ -1,0 +1,19 @@
+.card-body{
+    height: calc(100% - 2.5rem);
+}
+
+@media screen and (width >= 768px) {
+    .card img{
+        height: 40vh;
+    }
+}
+@media screen and (width >= 992px) {
+    .card img{
+        height: 32vh;
+    }
+}
+@media screen and (width >= 1200px) {
+    .card img{
+        height: 40vh;
+    }
+}

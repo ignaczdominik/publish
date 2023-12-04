@@ -63,3 +63,32 @@ function loadOffers(){
         row.append(card);
     }
 }
+
+function filter(){
+    const minValue = document.querySelector("#min-price").value
+    const maxValue = document.querySelector("#max-price").value
+
+    filtered = Offers.filter(o=>{
+        if(minValue != "" && maxValue == ""){
+            return o.cost >= minValue
+        }
+        if(minValue == "" && maxValue != ""){
+            return o.cost <= maxValue
+        }
+        if(minValue != "" && maxValue != ""){
+            return (o.cost >= minValue) && (o.cost <= maxValue)
+        }
+        return true
+    })
+    loadOffers()
+}
+
+function clearFilter(){
+    document.querySelector("#min-price").value = ""
+    document.querySelector("#max-price").value = ""
+    filtered = Offers
+    loadOffers()
+}
+
+document.querySelector("#run-filter").addEventListener("click", filter)
+document.querySelector("#clear-filter").addEventListener("click", clearFilter)
